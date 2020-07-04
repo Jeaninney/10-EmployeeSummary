@@ -100,7 +100,6 @@ function addIntern() {
     })
 }
 function writeHTML() {
-		console.log(`Final ${employeeArray}`);
 		fs.writeFile(outputPath, render(employeeArray), function(err) {
 			if (err) {
 				return console.log(err);
@@ -110,6 +109,5 @@ function writeHTML() {
 }
 
 init();
-console.log(`Final ${employeeArray}`);
 
 
