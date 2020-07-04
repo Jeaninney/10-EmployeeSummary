@@ -4,9 +4,12 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
-// ​const OUTPUT_DIR = path.resolve(__dirname, "output")
-// const outputPath = path.join(OUTPUT_DIR, "team.html");
-// const render = require("./lib/htmlRenderer");
+let OUTPUT_DIR = path.resolve(__dirname, "output");
+const outputPath = path.join(OUTPUT_DIR, "team.html");
+
+console.log(`testing ${outputPath}`);
+const render = require("./lib/htmlRenderer");
+
 const employeeArray = [];
 let id = 1;
 // Write code to use inquirer to gather information about the development team members,
@@ -27,7 +30,7 @@ function init() {
         } else if (answer.employeeType === "Intern") {
             addIntern();
         } else {
-            writeHTML();
+            writeHTML(employeeArray);
         }
     });
 };
@@ -97,9 +100,16 @@ function addIntern() {
     })
 }
 function writeHTML() {
-    console.log(employeeArray);
-
+		console.log(`Final ${employeeArray}`);
+		fs.writeFile(outputPath, render(employeeArray), function(err) {
+			if (err) {
+				return console.log(err);
+			}
+			console.log("Success!");
+		})	
 }
 
 init();
+console.log(`Final ${employeeArray}`);
+
 
